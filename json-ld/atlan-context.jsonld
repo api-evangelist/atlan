@@ -1,0 +1,165 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "atlan": "https://atlan.com/vocab/",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "provider": {
+      "@id": "schema:provider",
+      "@type": "@id"
+    },
+    "Organization": "schema:Organization",
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "WebAPI": "schema:WebAPI",
+    "DataCatalog": "schema:DataCatalog",
+
+    "humanURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "baseURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "documentationUrl": {
+      "@id": "schema:documentation",
+      "@type": "@id"
+    },
+    "termsOfService": {
+      "@id": "schema:termsOfService",
+      "@type": "@id"
+    },
+    "pricingUrl": {
+      "@id": "schema:offers",
+      "@type": "@id"
+    },
+    "statusUrl": {
+      "@id": "atlan:statusPage",
+      "@type": "@id"
+    },
+    "blogUrl": {
+      "@id": "atlan:blog",
+      "@type": "@id"
+    },
+
+    "DataAsset": {
+      "@id": "atlan:DataAsset",
+      "@type": "schema:Thing"
+    },
+    "DataLineage": {
+      "@id": "atlan:DataLineage",
+      "@type": "schema:Thing"
+    },
+    "Glossary": {
+      "@id": "atlan:Glossary",
+      "@type": "schema:DefinedTermSet"
+    },
+    "GlossaryTerm": {
+      "@id": "atlan:GlossaryTerm",
+      "@type": "schema:DefinedTerm"
+    },
+    "Classification": {
+      "@id": "atlan:Classification",
+      "@type": "schema:Thing"
+    },
+    "CustomMetadata": {
+      "@id": "atlan:CustomMetadata",
+      "@type": "schema:PropertyValue"
+    },
+    "Persona": {
+      "@id": "atlan:Persona",
+      "@type": "schema:Role"
+    },
+    "Purpose": {
+      "@id": "atlan:Purpose",
+      "@type": "schema:Goal"
+    },
+    "Policy": {
+      "@id": "atlan:Policy",
+      "@type": "schema:DigitalDocument"
+    },
+    "Connection": {
+      "@id": "atlan:Connection",
+      "@type": "schema:Thing"
+    },
+    "APISpec": {
+      "@id": "atlan:APISpec",
+      "@type": "schema:APIReference"
+    },
+
+    "tenantUrl": {
+      "@id": "atlan:tenantUrl",
+      "@type": "@id"
+    },
+    "connectorType": {
+      "@id": "atlan:connectorType",
+      "@type": "xsd:string"
+    },
+    "qualifiedName": {
+      "@id": "atlan:qualifiedName",
+      "@type": "xsd:string"
+    },
+    "assetType": {
+      "@id": "atlan:assetType",
+      "@type": "xsd:string"
+    },
+    "governanceStatus": {
+      "@id": "atlan:governanceStatus",
+      "@type": "xsd:string"
+    },
+    "lineageUpstreamCount": {
+      "@id": "atlan:lineageUpstreamCount",
+      "@type": "xsd:integer"
+    },
+    "lineageDownstreamCount": {
+      "@id": "atlan:lineageDownstreamCount",
+      "@type": "xsd:integer"
+    },
+    "certificateStatus": {
+      "@id": "atlan:certificateStatus",
+      "@type": "xsd:string"
+    },
+    "ownerUsers": {
+      "@id": "atlan:ownerUsers",
+      "@type": "xsd:string"
+    },
+    "ownerGroups": {
+      "@id": "atlan:ownerGroups",
+      "@type": "xsd:string"
+    }
+  },
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://atlan.com",
+      "name": "Atlan",
+      "description": "Atlan is a data catalog and metadata management platform — the Context Layer for AI — that unifies metadata from 80+ business systems into a single knowledge graph.",
+      "url": "https://atlan.com",
+      "documentationUrl": "https://docs.atlan.com/",
+      "blogUrl": "https://blog.atlan.com/",
+      "pricingUrl": "https://atlan.com/data-catalog-pricing/",
+      "statusUrl": "https://status.atlan.com/"
+    },
+    {
+      "@type": "WebAPI",
+      "@id": "https://atlan.com/api/rest",
+      "name": "Atlan REST API",
+      "description": "Core REST API for programmatic access to Atlan platform capabilities including asset management, data lineage, glossary terms, classifications, custom metadata, personas, purposes, and governance workflows.",
+      "provider": "https://atlan.com",
+      "documentationUrl": "https://docs.atlan.com/",
+      "baseURL": "https://{tenant}.atlan.com/api"
+    },
+    {
+      "@type": "WebAPI",
+      "@id": "https://atlan.com/api/graphql",
+      "name": "Atlan GraphQL API",
+      "description": "GraphQL interface for querying Atlan's knowledge graph, enabling flexible traversal of metadata relationships including asset lineage, classifications, tags, business glossary links, and governance policies.",
+      "provider": "https://atlan.com",
+      "documentationUrl": "https://docs.atlan.com/",
+      "baseURL": "https://{tenant}.atlan.com/api/graphql"
+    }
+  ]
+}
