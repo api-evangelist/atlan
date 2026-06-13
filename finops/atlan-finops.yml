@@ -1,0 +1,106 @@
+name: Atlan FinOps
+description: >-
+  FinOps Framework 1.0 FOCUS-aligned cost and usage profile for the Atlan data
+  catalog and metadata management platform. Atlan uses enterprise, quote-based
+  pricing without a public self-serve tier. All spend is negotiated annually
+  with Atlan sales and billed as a subscription. This document captures key
+  cost drivers, optimization levers, and governance considerations for teams
+  managing Atlan spend.
+specificationVersion: "1.0"
+url: https://atlan.com/data-catalog-pricing/
+provider:
+  name: Atlan
+  website: https://atlan.com/
+  pricingPage: https://atlan.com/data-catalog-pricing/
+  billingModel: Annual subscription; custom enterprise contract
+  currencyCode: USD
+costDimensions:
+  - dimension: Active Contributors (Seats)
+    description: >-
+      Primary per-seat cost driver. Data engineers, analysts, stewards, and
+      administrators who actively manage or enrich metadata are counted as
+      billable contributors. Read-only viewers/guests are typically free or
+      lower cost.
+    unit: user/year
+    estimatedRange:
+      low: 10000
+      high: 500000
+      currency: USD
+      basis: total annual contract
+    notes: Role differentiation (engineer vs. analyst vs. admin) may affect per-seat rate.
+  - dimension: Data Estate Scale
+    description: >-
+      Asset volume and connector breadth influence contract size. Larger data
+      estates with more cataloged assets and active connections drive higher
+      contract values. 50+ primary connectors are included in Premier and
+      Enterprise tiers.
+    unit: connected assets / connectors
+    notes: 80+ connectors available; core set included, specialty connectors may be add-ons.
+  - dimension: AI Context Agents and Advanced Features
+    description: >-
+      AI-powered capabilities including Context Agents, Context Engineering
+      Studio, Context Lakehouse, and MCP Server integration are Enterprise
+      add-ons that increase contract value.
+    unit: feature add-on
+    notes: Priced within custom Enterprise contracts; not available on Starter.
+  - dimension: Implementation and Professional Services
+    description: >-
+      Onboarding, custom integration development, training, and ongoing
+      professional services add 40-60% to base licensing cost (total cost of
+      ownership).
+    unit: engagement
+    estimatedRange:
+      low: 0.40
+      high: 0.60
+      basis: multiplier on base license
+costOptimization:
+  - action: Right-size contributor seats
+    description: >-
+      Audit active users quarterly. Downgrade inactive contributors to
+      read-only viewer roles to reduce billable seat count.
+    impactLevel: high
+  - action: Consolidate connector usage
+    description: >-
+      Ensure only actively used connectors and integrations are enabled.
+      Unused connectors in a large estate can inflate perceived scope.
+    impactLevel: medium
+  - action: Negotiate multi-year contracts
+    description: >-
+      Multi-year commitments typically unlock discounts of 10-20% versus
+      annual renewals.
+    impactLevel: high
+  - action: Benchmark against alternatives
+    description: >-
+      Use competitive bids from Alation, Collibra, or open-source options
+      (Apache Atlas) as leverage in renewal negotiations.
+    impactLevel: medium
+  - action: Leverage included connectors
+    description: >-
+      Maximize value from the 50+ connectors included in Premier/Enterprise
+      before paying for custom integration development.
+    impactLevel: medium
+  - action: Optimize API usage patterns
+    description: >-
+      Use SDK batch helpers and pagination to minimize redundant API calls.
+      Excessive API usage may trigger throttling and operational overhead
+      without corresponding value.
+    impactLevel: low
+billing:
+  cycle: Annual
+  paymentTerms: Net 30 (typical)
+  invoiceType: Enterprise subscription invoice
+  renewalProcess: >-
+    Renewals are renegotiated with Atlan account team. Start renewal
+    discussions 90 days before contract end date to allow time for
+    benchmarking and negotiation.
+  notes: >-
+    No self-serve billing portal. All billing managed through Atlan account
+    team. Request itemized invoice breakdown for seats, connectors, and
+    add-ons to enable granular cost allocation.
+allocation:
+  - tag: Department
+    description: Allocate Atlan costs by cataloged data domain or business unit.
+  - tag: DataProduct
+    description: Track cost per cataloged data product or domain area.
+  - tag: Environment
+    description: Separate production vs. development tenant costs if multi-tenant.

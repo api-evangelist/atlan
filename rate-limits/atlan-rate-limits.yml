@@ -1,0 +1,63 @@
+name: Atlan API Rate Limits
+description: >-
+  Atlan's REST API enforces rate limiting on a per-tenant, per-token basis.
+  The platform returns HTTP 429 (Too Many Requests) when limits are exceeded.
+  Atlan's official SDKs implement automatic retry logic with exponential backoff
+  to handle transient throttling transparently. Specific numeric thresholds are
+  not publicly documented and vary by deployment tier and tenant configuration.
+specificationVersion: "0.1"
+url: https://docs.atlan.com/
+rateLimits:
+  - name: REST API Throttling
+    description: >-
+      Atlan's REST API enforces rate limits per API token or OAuth client.
+      When the limit is exceeded the API returns HTTP 429. The Python SDK
+      retries up to 5 times with exponential backoff by default; the Java SDK
+      retries up to 3 times. Customers executing 10,000+ API calls per week
+      are documented in Atlan's own case studies.
+    statusCode: 429
+    retryAfterHeader: Retry-After
+    sdkRetryBehavior:
+      python:
+        maxRetries: 5
+        backoff: exponential
+        retriableStatusCodes:
+          - 403
+          - 429
+          - 500
+          - 502
+          - 503
+          - 504
+      java:
+        maxRetries: 3
+        backoff: exponential
+        retriableStatusCodes:
+          - 403
+          - 429
+          - 500
+          - 502
+          - 503
+          - 504
+    notes: >-
+      Specific rate-limit thresholds (requests per minute/hour) are tenant-specific
+      and not publicly disclosed. Contact Atlan support or your customer success
+      manager for limits applicable to your deployment.
+  - name: API Token Scope
+    description: >-
+      Each API token carries the full permissions of the issuing user or service
+      account, filtered by the persona assigned to the token. OAuth 2.0 clients
+      use scoped, short-lived tokens for least-privilege access.
+    authType: BearerToken
+    alternativeAuth: OAuth2ClientCredentials
+  - name: Search / Query Limits
+    description: >-
+      Search result sets are paginated. Large bulk operations (asset creation,
+      bulk classification) should be batched and throttled by the caller. The
+      Atlan SDKs provide iterator helpers for safe pagination of large result sets.
+    pagination: cursor-based
+    notes: >-
+      Bulk operations on very large asset sets may require partitioning workloads
+      across time windows. SDK batch helpers are available in Python and Java.
+documentation:
+  url: https://docs.atlan.com/get-started/references/api-authentication
+  support: https://ask.atlan.com/

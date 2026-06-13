@@ -1,0 +1,74 @@
+name: Atlan Plans and Pricing
+description: >-
+  Atlan's pricing is enterprise-focused and quote-based, structured around the
+  scale of data estate being governed, number of active contributors, and
+  optional capability add-ons. Atlan does not publish self-serve pricing tiers
+  publicly — all plans require contacting sales for a custom proposal. Typical
+  annual contracts range from $10,000 for small teams to $500,000+ for large
+  enterprise deployments.
+specificationVersion: "0.1"
+url: https://atlan.com/data-catalog-pricing/
+plans:
+  - name: Starter
+    description: >-
+      Entry-level plan suited for small to medium-sized businesses beginning to
+      implement a data catalog. Includes core metadata management, basic
+      lineage, and a limited number of connector integrations.
+    type: commercial
+    pricingModel: per-seat
+    pricingPage: https://atlan.com/data-catalog-pricing/
+    features:
+      - Core metadata catalog
+      - Basic data lineage
+      - Limited connectors (subset of 80+)
+      - REST API access
+      - Python and Java SDK support
+      - Community support
+    notes: Pricing available on request; estimated $10,000-$15,000 annually for small teams.
+  - name: Premier
+    description: >-
+      Mid-tier plan for growing organizations with advanced data governance needs.
+      Adds enhanced collaboration features, more connectors, advanced governance
+      workflows, and priority support.
+    type: commercial
+    pricingModel: per-seat
+    pricingPage: https://atlan.com/data-catalog-pricing/
+    features:
+      - Everything in Starter
+      - Advanced data lineage
+      - 50+ connectors included
+      - Glossary term management
+      - Classification and tagging
+      - Persona and purpose-based access control
+      - OAuth 2.0 client credentials
+      - Priority support
+    notes: Pricing available on request; estimated $50,000-$150,000 annually for mid-market.
+  - name: Enterprise
+    description: >-
+      Full-featured enterprise plan for large organizations with complex data
+      landscapes, stringent governance requirements, and high scalability needs.
+      Includes AI-powered context agents, MCP server integration, and dedicated
+      support.
+    type: commercial
+    pricingModel: custom
+    pricingPage: https://atlan.com/data-catalog-pricing/
+    features:
+      - Everything in Premier
+      - AI Context Agents
+      - Context Engineering Studio
+      - Context Lakehouse (Iceberg-native)
+      - MCP Server Integration
+      - Multi-tenant connectivity
+      - Custom metadata schemas
+      - Webhooks and event-driven governance
+      - SLA-backed support
+      - Dedicated customer success manager
+      - SSO and advanced security
+      - All 80+ connectors
+    notes: >-
+      Pricing negotiated based on scale; estimated $200,000-$500,000+ annually
+      for large enterprises. TCO typically 40-60% higher than base licensing
+      when including implementation services, training, and maintenance.
+contact:
+  url: https://atlan.com/
+  description: Contact Atlan sales for a custom pricing proposal.

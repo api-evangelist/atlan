@@ -1,0 +1,113 @@
+aid: atlan
+name: Atlan
+description: >-
+  Atlan is a data catalog and metadata management platform — the Context Layer
+  for AI — that unifies metadata from 80+ business systems into a single
+  knowledge graph. It provides REST and GraphQL APIs for managing data assets,
+  lineage, classifications, glossary terms, and data governance workflows.
+  Customers execute 10,000+ API calls per week powering automated documentation,
+  metadata enrichment, and custom integrations across the modern data stack.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/atlan/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Data Catalog
+  - Metadata Management
+  - Data Governance
+  - Data Lineage
+  - GraphQL
+  - REST
+  - AI
+  - Analytics
+apis:
+  - name: Atlan REST API
+    description: >-
+      The core REST API for the Atlan platform, providing programmatic access to
+      all platform capabilities including asset management, data lineage, glossary
+      terms, classifications, custom metadata, personas, purposes, and governance
+      workflows. Every metadata asset in Atlan — tables, columns, dashboards,
+      pipelines — is accessible via versioned REST endpoints.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.atlan.com/
+    baseURL: https://{tenant}.atlan.com/api
+    tags:
+      - Assets
+      - Lineage
+      - Glossary
+      - Classifications
+      - Governance
+      - REST
+    properties:
+      - type: Documentation
+        url: https://docs.atlan.com/
+      - type: Authentication
+        url: https://docs.atlan.com/get-started/references/api-authentication
+      - type: GitHubOrg
+        url: https://github.com/atlanhq
+      - type: PythonSDK
+        url: https://github.com/atlanhq/atlan-python
+      - type: JavaSDK
+        url: https://github.com/atlanhq/atlan-java
+      - type: GoSDK
+        url: https://github.com/atlanhq/atlan-go
+  - name: Atlan GraphQL API
+    description: >-
+      GraphQL interface for querying Atlan's knowledge graph, enabling flexible
+      traversal of metadata relationships including asset lineage, classifications,
+      tags, business glossary links, and governance policies across the connected
+      data estate.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.atlan.com/
+    baseURL: https://{tenant}.atlan.com/api/graphql
+    tags:
+      - GraphQL
+      - Assets
+      - Lineage
+      - Metadata
+    properties:
+      - type: Documentation
+        url: https://docs.atlan.com/
+  - name: Atlan Webhooks API
+    description: >-
+      Real-time event webhooks that capture and deliver notifications when metadata
+      changes occur within the Atlan platform, enabling downstream integrations,
+      automation pipelines, and event-driven governance workflows.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.atlan.com/
+    baseURL: https://{tenant}.atlan.com/api
+    tags:
+      - Webhooks
+      - Events
+      - Real-time
+    properties:
+      - type: Documentation
+        url: https://docs.atlan.com/
+common:
+  - type: Website
+    url: https://atlan.com/
+  - type: Documentation
+    url: https://docs.atlan.com/
+  - type: GitHubOrg
+    url: https://github.com/atlanhq
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/atlan-hq/
+  - type: Blog
+    url: https://blog.atlan.com/
+  - type: Pricing
+    url: https://atlan.com/data-catalog-pricing/
+  - type: StatusPage
+    url: https://status.atlan.com/
+  - type: X
+    url: https://x.com/atlanhq
+  - type: Plans
+    url: plans/atlan-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/atlan-rate-limits.yml
+  - type: FinOps
+    url: finops/atlan-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
