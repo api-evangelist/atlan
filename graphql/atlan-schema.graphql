@@ -1,0 +1,967 @@
+# Atlan GraphQL Schema (SDL)
+# Derived from the atlan-python SDK (github.com/atlanhq/atlan-python) model layer,
+# the Apache Atlas entity model that underpins Atlan's metadata graph, and Atlan's
+# public API documentation.
+# Endpoint: https://{tenant}.atlan.com/api/graphql
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar Long
+scalar JSON
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum EntityStatus {
+  ACTIVE
+  DELETED
+}
+
+enum CertificateStatus {
+  VERIFIED
+  DRAFT
+  DEPRECATED
+}
+
+enum AnnouncementType {
+  INFORMATION
+  WARNING
+  ISSUE
+}
+
+enum LineageDirection {
+  UPSTREAM
+  DOWNSTREAM
+  BOTH
+}
+
+enum SortOrder {
+  ASCENDING
+  DESCENDING
+}
+
+enum AtlanTypeCategory {
+  PRIMITIVE
+  OBJECT_ID_TYPE
+  ENUM
+  STRUCT
+  CLASSIFICATION
+  ENTITY
+  RELATIONSHIP
+  BUSINESS_METADATA
+}
+
+# ─── Root Interface ──────────────────────────────────────────────────────────
+
+"""
+Base interface implemented by every entity in the Atlan knowledge graph.
+Corresponds to the Atlas Referenceable supertype.
+"""
+interface Referenceable {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+}
+
+# ─── Asset Interface ─────────────────────────────────────────────────────────
+
+"""
+Core asset interface; all data catalog entities implement this.
+Extends Referenceable with human-facing metadata fields.
+"""
+interface Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+# ─── Classification / Tag ────────────────────────────────────────────────────
+
+"""
+An Atlan Tag (formerly classification) applied to an asset.
+"""
+type AtlanTag {
+  typeName: String!
+  entityGuid: ID
+  entityStatus: EntityStatus
+  propagate: Boolean
+  removePropagationsOnEntityDelete: Boolean
+  validityPeriods: JSON
+}
+
+"""
+A tag definition (schema-level type) registered in the tenant.
+"""
+type Tag implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tagId: String
+  tagAttributes: JSON
+  tagAllowedValues: [String]
+  mappedClassificationName: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+# ─── SQL Hierarchy ───────────────────────────────────────────────────────────
+
+"""
+Base type for all SQL-lineage assets: Database, Schema, Table, View, Column.
+"""
+interface SQLAsset {
+  queryCount: Long
+  queryUserCount: Long
+  databaseName: String
+  databaseQualifiedName: String
+  schemaName: String
+  schemaQualifiedName: String
+  tableName: String
+  tableQualifiedName: String
+  viewName: String
+  viewQualifiedName: String
+  isProfiled: Boolean
+  lastProfiledAt: Long
+}
+
+type Connection implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+type Database implements Asset & SQLAsset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  # SQL fields
+  queryCount: Long
+  queryUserCount: Long
+  databaseName: String
+  databaseQualifiedName: String
+  schemaName: String
+  schemaQualifiedName: String
+  tableName: String
+  tableQualifiedName: String
+  viewName: String
+  viewQualifiedName: String
+  isProfiled: Boolean
+  lastProfiledAt: Long
+  # Database-specific
+  schemaCount: Int
+  schemas: [Schema]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+type Schema implements Asset & SQLAsset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  # SQL fields
+  queryCount: Long
+  queryUserCount: Long
+  databaseName: String
+  databaseQualifiedName: String
+  schemaName: String
+  schemaQualifiedName: String
+  tableName: String
+  tableQualifiedName: String
+  viewName: String
+  viewQualifiedName: String
+  isProfiled: Boolean
+  lastProfiledAt: Long
+  # Schema-specific
+  tableCount: Int
+  viewsCount: Int
+  database: Database
+  tables: [Table]
+  views: [Table]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+type Table implements Asset & SQLAsset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  # SQL fields
+  queryCount: Long
+  queryUserCount: Long
+  databaseName: String
+  databaseQualifiedName: String
+  schemaName: String
+  schemaQualifiedName: String
+  tableName: String
+  tableQualifiedName: String
+  viewName: String
+  viewQualifiedName: String
+  isProfiled: Boolean
+  lastProfiledAt: Long
+  # Table-specific
+  columnCount: Int
+  rowCount: Long
+  sizeBytes: Long
+  alias: String
+  isTemporary: Boolean
+  isPartitioned: Boolean
+  partitionStrategy: String
+  schema: Schema
+  columns: [Column]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+type Column implements Asset & SQLAsset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  # SQL fields
+  queryCount: Long
+  queryUserCount: Long
+  databaseName: String
+  databaseQualifiedName: String
+  schemaName: String
+  schemaQualifiedName: String
+  tableName: String
+  tableQualifiedName: String
+  viewName: String
+  viewQualifiedName: String
+  isProfiled: Boolean
+  lastProfiledAt: Long
+  # Column-specific
+  dataType: String
+  subDataType: String
+  order: Int
+  nestedColumnCount: Int
+  isPrimary: Boolean
+  isForeign: Boolean
+  isIndexed: Boolean
+  isPartition: Boolean
+  partitionOrder: Int
+  isClustered: Boolean
+  isSort: Boolean
+  isDist: Boolean
+  isPinned: Boolean
+  rawDataTypeDefinition: String
+  table: Table
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+# ─── Glossary Types ──────────────────────────────────────────────────────────
+
+type Glossary implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  # Glossary-specific
+  shortDescription: String
+  longDescription: String
+  language: String
+  usage: String
+  glossaryType: String
+  additionalAttributes: JSON
+  terms: [GlossaryTerm]
+  categories: [GlossaryCategory]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+type GlossaryTerm implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  certificateUpdatedBy: String
+  certificateUpdatedAt: Long
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  adminUsers: [String]
+  adminGroups: [String]
+  viewerUsers: [String]
+  viewerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  # GlossaryTerm-specific
+  shortDescription: String
+  longDescription: String
+  examples: String
+  abbreviation: String
+  usage: String
+  termType: String
+  anchor: Glossary
+  categories: [GlossaryCategory]
+  synonyms: [GlossaryTerm]
+  antonyms: [GlossaryTerm]
+  seeAlso: [GlossaryTerm]
+  isA: [GlossaryTerm]
+  classifies: [GlossaryTerm]
+  preferredTerms: [GlossaryTerm]
+  preferredToTerms: [GlossaryTerm]
+  replacedBy: [GlossaryTerm]
+  replacementTerms: [GlossaryTerm]
+  translationTerms: [GlossaryTerm]
+  translatedTerms: [GlossaryTerm]
+  validValues: [GlossaryTerm]
+  validValuesFor: [GlossaryTerm]
+  assignedEntities: [Asset]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+type GlossaryCategory implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  shortDescription: String
+  longDescription: String
+  anchor: Glossary
+  terms: [GlossaryTerm]
+  childrenCategories: [GlossaryCategory]
+  parentCategory: GlossaryCategory
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+# ─── Lineage ─────────────────────────────────────────────────────────────────
+
+"""
+A lineage process connecting upstream input assets to downstream output assets.
+"""
+type Process implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  hasLineage: Boolean
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  subType: String
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  code: String
+  sql: String
+  ast: String
+  additionalEtlContext: String
+  inputs: [Asset]
+  outputs: [Asset]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+type LineageGraph {
+  guid: String!
+  name: String
+  qualifiedName: String
+  upstreamAssets: [Asset]
+  downstreamAssets: [Asset]
+  upstreamProcesses: [Process]
+  downstreamProcesses: [Process]
+}
+
+# ─── Governance: Persona & Purpose ───────────────────────────────────────────
+
+"""
+A Persona defines a named set of access-control policies for a group of users.
+"""
+type Persona implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  isAccessControlEnabled: Boolean
+  personaUsers: [String]
+  personaGroups: [String]
+  roleId: String
+  policies: [JSON]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+"""
+A Purpose defines tag-based access policies applied across all assets
+that carry a specific Atlan Tag.
+"""
+type Purpose implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  isAccessControlEnabled: Boolean
+  purposeClassifications: [String]
+  policies: [JSON]
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+# ─── Users & Groups ──────────────────────────────────────────────────────────
+
+type AtlanUser {
+  id: ID
+  username: String
+  firstName: String
+  lastName: String
+  email: String
+  enabled: Boolean
+  emailVerified: Boolean
+  attributes: JSON
+  createdTimestamp: Long
+}
+
+type AtlanGroup {
+  id: ID
+  name: String
+  path: String
+  attributes: JSON
+}
+
+# ─── Link (resource attached to an asset) ────────────────────────────────────
+
+type Link implements Asset {
+  guid: ID!
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  tenantId: String
+  certificateStatus: CertificateStatus
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+  connectorName: String
+  connectionName: String
+  connectionQualifiedName: String
+  isDiscoverable: Boolean
+  isEditable: Boolean
+  status: EntityStatus
+  createdBy: String
+  updatedBy: String
+  createTime: Long
+  updateTime: Long
+  icon: String
+  iconType: String
+  asset: Asset
+  atlanTags: [AtlanTag]
+  propagatedAtlanTags: [AtlanTag]
+  assignedTerms: [GlossaryTerm]
+  links: [Link]
+}
+
+# ─── Pagination & Search Inputs ──────────────────────────────────────────────
+
+input AssetFilter {
+  qualifiedName: String
+  name: String
+  typeName: String
+  connectionQualifiedName: String
+  status: EntityStatus
+  certificateStatus: CertificateStatus
+}
+
+input SortInput {
+  field: String!
+  order: SortOrder
+}
+
+type PageInfo {
+  total: Long!
+  offset: Int!
+  limit: Int!
+}
+
+type AssetConnection {
+  pageInfo: PageInfo!
+  assets: [Asset]
+}
+
+# ─── Query Root ──────────────────────────────────────────────────────────────
+
+type Query {
+  """Retrieve a single asset by its GUID."""
+  asset(guid: ID!): Asset
+
+  """
+  Search assets using free-text and structured filters with pagination.
+  Mirrors the DSL search exposed by the REST API.
+  """
+  assets(
+    query: String
+    filter: AssetFilter
+    sort: [SortInput]
+    offset: Int
+    limit: Int
+  ): AssetConnection
+
+  """Retrieve a single Glossary by GUID."""
+  glossary(guid: ID!): Glossary
+
+  """List all Glossaries in the tenant."""
+  glossaries(offset: Int, limit: Int): [Glossary]
+
+  """Retrieve a single GlossaryTerm by GUID."""
+  glossaryTerm(guid: ID!): GlossaryTerm
+
+  """Retrieve a single Database by GUID."""
+  database(guid: ID!): Database
+
+  """Retrieve a single Schema by GUID."""
+  schema(guid: ID!): Schema
+
+  """Retrieve a single Table by GUID."""
+  table(guid: ID!): Table
+
+  """Retrieve a single Column by GUID."""
+  column(guid: ID!): Column
+
+  """Retrieve a single Connection by GUID."""
+  connection(guid: ID!): Connection
+
+  """List all Connections in the tenant."""
+  connections(offset: Int, limit: Int): [Connection]
+
+  """Retrieve lineage graph for an asset."""
+  lineage(
+    guid: ID!
+    direction: LineageDirection
+    depth: Int
+    offset: Int
+    limit: Int
+  ): LineageGraph
+
+  """Retrieve a Persona by GUID."""
+  persona(guid: ID!): Persona
+
+  """List all Personas in the tenant."""
+  personas(offset: Int, limit: Int): [Persona]
+
+  """Retrieve a Purpose by GUID."""
+  purpose(guid: ID!): Purpose
+
+  """List all Purposes in the tenant."""
+  purposes(offset: Int, limit: Int): [Purpose]
+
+  """List all users in the tenant."""
+  users(offset: Int, limit: Int): [AtlanUser]
+
+  """List all groups in the tenant."""
+  groups(offset: Int, limit: Int): [AtlanGroup]
+}
+
+# ─── Mutation Root ───────────────────────────────────────────────────────────
+
+input AssetInput {
+  typeName: String!
+  qualifiedName: String!
+  name: String
+  displayName: String
+  description: String
+  userDescription: String
+  certificateStatus: CertificateStatus
+  certificateStatusMessage: String
+  announcementTitle: String
+  announcementMessage: String
+  announcementType: AnnouncementType
+  ownerUsers: [String]
+  ownerGroups: [String]
+}
+
+type MutationResponse {
+  guid: ID
+  qualifiedName: String
+  typeName: String
+  mutatedEntities: JSON
+}
+
+type Mutation {
+  """Create or update an asset (upsert semantics via qualifiedName)."""
+  upsertAsset(input: AssetInput!): MutationResponse
+
+  """Remove an asset by GUID (soft-delete; sets status to DELETED)."""
+  deleteAsset(guid: ID!): MutationResponse
+
+  """Attach an Atlan Tag to an asset."""
+  addAtlanTag(
+    guid: ID!
+    tagName: String!
+    propagate: Boolean
+  ): MutationResponse
+
+  """Remove an Atlan Tag from an asset."""
+  removeAtlanTag(guid: ID!, tagName: String!): MutationResponse
+
+  """Link a GlossaryTerm to an asset."""
+  assignTerm(assetGuid: ID!, termGuid: ID!): MutationResponse
+
+  """Remove a GlossaryTerm link from an asset."""
+  removeTerm(assetGuid: ID!, termGuid: ID!): MutationResponse
+}
