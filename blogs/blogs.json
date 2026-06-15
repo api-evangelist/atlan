@@ -1,77 +1,117 @@
 {
   "provider": "atlan",
   "blog_url": "https://blog.atlan.com/",
-  "fetched": "2026-06-13",
+  "fetched": "2026-06-14T20:42:17Z",
   "posts": [
     {
       "title": "Building Mnemosyne, our AI second brain for engineering work",
       "url": "https://blog.atlan.com/engineering/mnemosyne-how-to-give-ai-context/",
       "date": "2026-04-13",
-      "authors": ["Nikhila Jain"],
+      "authors": [
+        "Nikhila Jain"
+      ],
       "category": "engineering"
     },
     {
       "title": "From Argo to Temporal Migration: How We Rebuilt Atlan's Workflow Orchestration",
       "url": "https://blog.atlan.com/engineering/argo-to-temporal-migration/",
       "date": "2026-04-03",
-      "authors": ["Nikhila Jain", "Sanil Khurana"],
+      "authors": [
+        "Nikhila Jain",
+        "Sanil Khurana"
+      ],
       "category": "engineering"
     },
     {
       "title": "The Feedback Loop: Improving the Quality of Context for Humans and AI",
       "url": "https://blog.atlan.com/community/metadata-feedback-loop-context-layer/",
       "date": "2026-03-10",
-      "authors": ["Rishi Gaurav Bhatnagar", "Dhriti Arjun"],
+      "authors": [
+        "Rishi Gaurav Bhatnagar",
+        "Dhriti Arjun"
+      ],
       "category": "community"
     },
     {
       "title": "Olof: How an AI Queue Manager Rebuilt Support Engineering at Atlan",
       "url": "https://blog.atlan.com/engineering/olof-how-an-ai-queue-manager-rebuilt-support-engineering-at-atlan/",
       "date": "2026-02-05",
-      "authors": ["Rahul Bhatiya", "Taksh Preet Singh"],
+      "authors": [
+        "Rahul Bhatiya",
+        "Taksh Preet Singh"
+      ],
       "category": "engineering"
     },
     {
       "title": "Product to Platform Transformation: Why We Rebuilt Atlan's Apps Framework",
       "url": "https://blog.atlan.com/engineering/product-to-platform-transformation/",
       "date": "2026-01-21",
-      "authors": ["Nikhila Jain", "Christopher Grote"],
+      "authors": [
+        "Nikhila Jain",
+        "Christopher Grote"
+      ],
       "category": "engineering"
     },
     {
       "title": "From Human-Led to AI-Native: How We Transformed Our CX Organization in 9 Months",
       "url": "https://blog.atlan.com/team/from-human-led-to-ai-native-how-we-transformed-our-cx-organization-in-9-months/",
       "date": "2025-11-28",
-      "authors": ["Nandini Tyagi", "Himanshu Sikaria", "Aydan McNulty"],
+      "authors": [
+        "Nandini Tyagi",
+        "Himanshu Sikaria",
+        "Aydan McNulty"
+      ],
       "category": "team"
     },
     {
       "title": "Cursor Rules in Action: How Our Engineers Use It at Atlan",
       "url": "https://blog.atlan.com/engineering/cursor-rules/",
       "date": "2025-06-30",
-      "authors": ["Advit", "Shubhankar Khare"],
+      "authors": [
+        "Advit",
+        "Shubhankar Khare"
+      ],
       "category": "engineering"
     },
     {
       "title": "From Metadata to Meaningful Action: Unlock AI-Powered Decision Making with Atlan MCP",
       "url": "https://blog.atlan.com/announcements/atlan-mcp-ai-metadata/",
       "date": "2025-04-24",
-      "authors": ["Hrushikesh Dokala"],
+      "authors": [
+        "Hrushikesh Dokala"
+      ],
       "category": "announcements"
     },
     {
       "title": "From Chaos to Clarity: How Atlan's Advisory Workshops Help Data Teams Win",
       "url": "https://blog.atlan.com/community/atlan-advisory-workshop/",
       "date": "2025-04-04",
-      "authors": ["Ghazal", "Dhruv Saharya", "Rishi Gaurav Bhatnagar"],
+      "authors": [
+        "Ghazal",
+        "Dhruv Saharya",
+        "Rishi Gaurav Bhatnagar"
+      ],
       "category": "community"
     },
     {
       "title": "How Ring Deployment Transformed Our Release Process",
       "url": "https://blog.atlan.com/engineering/ring-deployment-releases/",
       "date": "2025-03-10",
-      "authors": ["Tianchu Zhao"],
+      "authors": [
+        "Tianchu Zhao"
+      ],
       "category": "engineering"
     }
-  ]
+  ],
+  "repo": "atlan",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/atlan-hq/",
+      "feed_url": "https://www.linkedin.com/company/atlan-hq/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0
 }
