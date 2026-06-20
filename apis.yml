@@ -7,7 +7,7 @@ description: Atlan is a data catalog and metadata management platform — the Co
   per week powering automated documentation, metadata enrichment, and custom integrations
   across the modern data stack.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/atlan/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -28,7 +28,7 @@ apis:
     terms, classifications, custom metadata, personas, purposes, and governance workflows.
     Every metadata asset in Atlan — tables, columns, dashboards, pipelines — is accessible
     via versioned REST endpoints.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.atlan.com/
   baseURL: https://{tenant}.atlan.com/api
   tags:
@@ -56,7 +56,7 @@ apis:
     traversal of metadata relationships including asset lineage, classifications,
     tags, business glossary links, and governance policies across the connected data
     estate.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.atlan.com/
   baseURL: https://{tenant}.atlan.com/api/graphql
   tags:
@@ -75,7 +75,7 @@ apis:
   description: Real-time event webhooks that capture and deliver notifications when
     metadata changes occur within the Atlan platform, enabling downstream integrations,
     automation pipelines, and event-driven governance workflows.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.atlan.com/
   baseURL: https://{tenant}.atlan.com/api
   tags:
