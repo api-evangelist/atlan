@@ -86,6 +86,10 @@ apis:
   - type: Documentation
     url: https://docs.atlan.com/
 common:
+- type: VulnerabilityDisclosure
+  url: security/atlan-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/atlan-domain-security.yml
 - type: Website
   url: https://atlan.com/
 - type: Documentation
