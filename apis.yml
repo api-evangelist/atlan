@@ -31,6 +31,15 @@ tags:
 - Data Lineage
 - GraphQL
 - REST
+- Artificial Intelligence
+- Analytics
+tags_raw:
+- Data Catalog
+- Metadata Management
+- Data Governance
+- Data Lineage
+- GraphQL
+- REST
 - AI
 - Analytics
 apis:
@@ -91,6 +100,10 @@ apis:
   humanURL: https://docs.atlan.com/
   baseURL: https://{tenant}.atlan.com/api
   tags:
+  - Webhook
+  - Event
+  - Real-Time
+  tags_raw:
   - Webhooks
   - Events
   - Real-time
