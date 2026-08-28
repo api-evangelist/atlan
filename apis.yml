@@ -7,6 +7,17 @@ description: Atlan is a data catalog and metadata management platform — the Co
   per week powering automated documentation, metadata enrichment, and custom integrations
   across the modern data stack.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: unknown
