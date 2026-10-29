@@ -66,51 +66,126 @@
 
 Atlan is a data catalog and metadata management platform — the Context Layer for AI — that unifies metadata from 80+ business systems into a single knowledge graph. It provides REST and GraphQL APIs for managing data assets, lineage, classifications, glossary terms, and data governance workflows. Customers execute 10,000+ API calls per week powering automated documentation, metadata enrichment, and custom integrations across the modern data stack.
 
-**Website:** https://atlan.com/
-**Documentation:** https://docs.atlan.com/
-**Developer GitHub:** https://github.com/atlanhq
-**Blog:** https://blog.atlan.com/
-**Status:** https://status.atlan.com/
-**LinkedIn:** https://www.linkedin.com/company/atlan-hq/
-**X:** https://x.com/atlanhq
+**Areas:** Data Catalog · Metadata Management · Data Governance · Data Lineage · GraphQL · REST · Artificial Intelligence · Analytics
 
-## APIs
+## Atlan on APIs.io
 
-- **REST API** — Full platform access for assets, lineage, glossary, classifications, governance, personas, and purposes via versioned REST endpoints.
-- **GraphQL API** — Flexible graph traversal of the metadata knowledge graph.
-- **Webhooks API** — Real-time event delivery for metadata change notifications.
+Everything profiled for Atlan is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/atlan/](https://apis.io/providers/atlan/)** — or go straight to one of the APIs or properties below.
 
-## SDKs
+### APIs (3)
 
-| Language | Repository |
+- [Atlan REST API](https://apis.io/apis/atlan/atlan-rest-api/) — The core REST API for the Atlan platform, providing programmatic access to all platform capabilities including asset management, data lineage, glossary…
+- [Atlan GraphQL API](https://apis.io/apis/atlan/atlan-graphql-api/) — GraphQL interface for querying Atlan's knowledge graph, enabling flexible traversal of metadata relationships including asset lineage, classifications,…
+- [Atlan Webhooks API](https://apis.io/apis/atlan/atlan-webhooks-api/) — Real-time event webhooks that capture and deliver notifications when metadata changes occur within the Atlan platform, enabling downstream integrations,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Atlan GraphQL API](https://apis.io/graphqls/atlan/atlan-graphql/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [atlan](https://apis.io/servers/atlan/atlan/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Atlan Context](https://apis.io/jsonld/atlan/atlan-context/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Atlan Domain Security](https://apis.io/security/atlan/atlan-domain-security/)
+- [Atlan Vulnerability Disclosure](https://apis.io/security/atlan/atlan-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Atlan Plans Pricing](https://apis.io/plans/atlan/atlan-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Atlan Rate Limits](https://apis.io/rate-limits/atlan/atlan-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Atlan Finops](https://apis.io/finops/atlan/atlan-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://atlan.com/)
+- [Documentation](https://docs.atlan.com/)
+- [Pricing](https://atlan.com/data-catalog-pricing/)
+- [Blog](https://blog.atlan.com/)
+- [Status](https://status.atlan.com/)
+
+## API Evangelist rating
+
+**Kin Score 32.4** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
 |---|---|
-| Python | https://github.com/atlanhq/atlan-python |
-| Java / Kotlin / Scala / Clojure | https://github.com/atlanhq/atlan-java |
-| Go | https://github.com/atlanhq/atlan-go |
-| Application SDK (Python) | https://github.com/atlanhq/application-sdk |
-| AI Agent Toolkit | https://github.com/atlanhq/agent-toolkit |
+| Discoverability | 73.3 |
+| Contract quality | 46.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 18.4 |
 
-## Authentication
+**Agent readiness 28.3** — agent-aware
 
-Atlan supports two authentication methods:
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
 
-- **API Tokens** — Static bearer tokens tied to a user or service account. Simple setup for scripts and local development.
-- **OAuth 2.0 Client Credentials** — Short-lived scoped tokens for server-to-server workloads (CI/CD pipelines, backend services). Recommended for production.
+**Regulatory alignment 20.9** — Horizontal (data, software, accessibility, platform)
 
-Set `ATLAN_BASE_URL` and `ATLAN_API_KEY` (or `ATLAN_OAUTH_CLIENT_ID` / `ATLAN_OAUTH_CLIENT_SECRET`) as environment variables.
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/atlan/](https://apis.io/providers/atlan/).
 
-## Rate Limits
+## How this profile is made
 
-Atlan enforces per-tenant rate limits and returns HTTP 429 when exceeded. SDKs automatically retry with exponential backoff (Python: 5 retries; Java: 3 retries). Specific numeric thresholds are tenant-specific and not publicly disclosed.
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-## Pricing
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Atlan: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-Enterprise, quote-based pricing. No public self-serve tiers. Contracts range from ~$10,000/year (small teams) to $500,000+/year (large enterprise). Contact Atlan sales for a custom proposal.
+## Open an issue
 
-- [Plans and Pricing](plans/atlan-plans-pricing.yml)
-- [Rate Limits](rate-limits/atlan-rate-limits.yml)
-- [FinOps](finops/atlan-finops.yml)
-
----
-
-*Maintained by [Kin Lane](mailto:kin@apievangelist.com) — [APIs.json](apis.yml)*
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/atlan/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
